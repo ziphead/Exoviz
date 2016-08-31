@@ -1,0 +1,216 @@
+<html>
+<head>
+	{% block head %}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
+	<title>{% block title %}{% endblock %} {{pathway}}</title>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/vis.js') }}"></script>
+	<link href="{{ url_for('static', filename='css/vis.css') }}" rel="stylesheet" type="text/css" />
+	{% endblock %}
+</head>
+<body>
+		{% block body %}
+
+		<div class="container">
+				<!-- Codrops top bar -->
+				<div class="codrops-top">
+						<a href="{{ url_for('Main') }}">
+								<strong>Astronomical Database Visualisation</strong>
+						</a>
+						<span class="right">
+							<a href="http://www.openexoplanetcatalogue.com/">
+									Based on The Open Exoplanet Catalogue
+							</a>
+
+						</span>
+						<div class="clr"></div>
+				</div><!--/ Codrops top bar -->
+				<form action="{{ url_for('search_func') }}" method="POST">
+						<input type ="text" class="search_form" name="object_name" placeholder="Sun"  />
+						<link async href="http://fonts.googleapis.com/css?family=Antic" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
+						<input type="submit"
+						 style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+						 tabindex="-1" />
+				 </form>
+				<header>
+						<h1><span>Astronomical Database Visualisation</span></h1>
+
+		<p >
+			<a class="buttonz" href="/#followup_div">Updated</a>
+			<a class="buttonz" href="/#binnaries">Binaries</a>
+			<a class="buttonz" href="">Contacts</a>
+			<a class="buttonz" href="">Info</a>
+		</p>
+				</header>
+
+		</div>
+
+
+		<div class="tran_block"> {{pathway}}
+				</div>
+		<div class="mclass" align="center">
+
+			<div id="mynetwork"></div>
+
+<script type="text/javascript">
+
+
+
+
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+			{% for entry in mynodes %}
+        {{entry | safe}},
+				{% endfor %}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+			{% for entry in myedges %}
+
+			  {{entry | safe}},
+
+				{% endfor %}
+    ]);
+					{% endblock %}
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+		var options = {
+			interaction:{
+				dragNodes:false,
+				hover: false,
+			},
+			physics: {
+			enabled: false,
+			hierarchicalRepulsion: {
+		 centralGravity: 0,
+		 springLength: 1000,
+		 springConstant: 0.625,
+		 nodeDistance: 1870,
+		 damping: 0.2
+	 },
+	 maxVelocity: 10,
+	 minVelocity: 0.01,
+	 solver: "hierarchicalRepulsion",
+	 timestep: 0.33,
+
+			// forceAtlas2Based: {
+	    //   gravitationalConstant: -50,
+	    //   centralGravity: 0.01,
+	    //   springConstant: 0.08,
+	    //   springLength: 500,
+	    //   damping: 0.4,
+	    //   avoidOverlap: 1
+			// },
+			// hierarchicalRepulsion: {
+			// 	centralGravity: 0.0,
+			// 	springLength: 500,
+			// 	springConstant: 0.01,
+			// 	nodeDistance: 1520,
+			// 	damping: 0.09
+			// },
+			solver: 'hierarchicalRepulsion',
+			stabilization: {
+	      enabled: false,
+	      iterations: 1000,
+	      updateInterval: 100,
+	      onlyDynamicEdges: false,
+	      fit: true
+	    },
+
+	},
+	configure: false,
+
+		  edges:{
+
+		    color: {
+					 color: "white",
+      highlight: "rgba(255,243,40,1)",
+      hover: "rgba(255,52,51,1)",
+      inherit: false
+    },
+		    font: '12px arial #ff0000',
+		    shadow: false,
+				arrows: {
+      middle: {
+        enabled: true,
+        scaleFactor: 6
+      }
+    },
+				smooth: {
+					type: "straightCross",
+		 forceDirection: "none",
+		 roundness: 0.9
+	 },
+	 width : 9
+		  },
+			nodes:{
+		    shadow: false,
+				scaling:
+				{
+					label: {
+					min: 8,
+					max: 200
+				}
+				},
+				color: {
+					border: '#2B7CE9',
+					background: '#97C2FC',
+					highlight: {
+						border: '#2B7CE9',
+						background: '#D2E5FF'
+					},
+					hover: {
+						border: '#2B7CE9',
+						background: '#D2E5FF'
+					},
+				},
+		  },
+			groups:{
+		    Planet: { shape:'image', scaling: { min: 1, max: 1000,}, image : '{{ url_for('static', filename='images/icons/big_p.gif') }}',value: 1 },
+				Star: { shape:'image', scaling: { min: 1, max: 1000,}, image : '{{ url_for('static', filename='images/icons/star.png') }}',value: 10},
+				System: { label:'System  \n info', scaling: { min: 1, max: 1000,}, shape:'box', value: 100},
+				Binary: { label:'Binary \n info',  shape:'box',  value: 100}
+  		},
+			layout:{
+				improvedLayout:false,
+		    hierarchical: {
+		      enabled:true,
+		    	levelSeparation: 2550,
+		      nodeSpacing: 3200,
+		      treeSpacing: 2500,
+		      direction: 'UD',        // UD, DU, LR, RL
+		      sortMethod: 'directed'   // hubsize, directed
+		    }
+			},
+			interaction: {
+    dragNodes: false,
+    hover: true
+  },
+		};
+
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+		network.on("selectNode", function (params) {
+		 params.event = "[original event]";
+		 var node1 = nodes.get(params.nodes[0]);
+		 var myurl = "/" + node1.group + "/" + node1.odds;
+ 		 document.getElementById('myframe').src =myurl;
+		 console.log(node1)
+ });
+</script>
+		</div>
+<div class="black"><p class="header1">AVAILIBLE ATTRIBUTES:</p>
+	<div id="event" align="center">
+<iframe id="myframe" src =""  width="90%" height="500px"></iframe></div>
+</div>
+
+</body>
+
+</html>

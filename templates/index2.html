@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+{% extends "base.html" %}
+{% block title %}Hierarchical Astronomical Database{% endblock %}
+    {% block head %}
+    {{ super() }}
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Exoplanet Magazine" />
+        <meta name="keywords" content="Exoplanets, other planet systems, binary systems, hot jupiter, superearths, second earth" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}" />
+		<script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.custom.86080.js') }}"></script>
+    {% endblock %}
+    <body id="page">
+      		{% block body %}
+
+
+        <ul class="cb-slideshow">
+            <li><span>Image 01</span><div><h3>There are</h3></div></li>
+            <li><span>Image 02</span><div><h3>{{ message[3] }}</h3></div></li>
+            <li><span>Image 03</span><div><h3>of exoplanets</h3></div></li>
+            <li><span>Image 04</span><div><h3>{{ message[2] }}</h3></div></li>
+            <li><span>Image 05</span><div><h3>of stars</h3></div></li>
+            <li><span>Image 06</span><div><h3>In the catalog</h3></div></li>
+        </ul>
+        {% block menu %}
+          {{ super() }}
+
+        {% endblock menu %}
+          <div id="followup_div" align = "center">
+            <div class="tran_block"> LAST UPDATED PLANETS
+                </div>
+            <div class="mclass">
+            {% for entry in datachunk %}
+            <a class="block" href = "{{url_for('viz_sys', system_id = entry.homesystem.id )}}">
+            <ul>
+              <li>Planet name: <b>{{ entry.name }}</b></li>
+              <li> System name: <b>{{ entry.homesystem.name }}</b></li>
+              <li>	lastupdate  ==> <b> {{ entry.lastupdate }} </b></li>
+                <li> distance to system : \n {{ entry.homesystem.distance}}</li>
+
+                        </ul>
+                    </a>
+            {% endfor %}
+          </div>
+          <div id ="binnaries" class="black" align = "center">
+            <div class="tran_block"> STARS IN BINARY SYSTEMS
+                </div>
+                {% for entry in binchunk %}
+                <a class="block2" href = "{{url_for('viz_sys', system_id = entry.homesystem.id )}}">
+
+                <ul>
+                 <li>	System name  <b> {{ entry.homesystem.name }} </b></li>
+                  <li>Separation (AU): <b>{{ entry.separation_au }}</b></li>
+                    <li> Distance to system :  {{ entry.homesystem.distance}}</li>
+
+                            </ul>
+                        </a>
+                {% endfor %}
+          </div>
+        </div>
+        	{% endblock %}

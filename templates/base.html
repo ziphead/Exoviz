@@ -1,0 +1,84 @@
+<html>
+<head>
+	{% block head %}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/info.js') }}"></script>
+	<title>{% block title %}{% endblock %} {{pathway}}</title>
+	{% endblock %}
+</head>
+<body>
+		{% block body %}
+			{% block menu %}
+		<div class="container2">
+				<!-- Codrops top bar -->
+				<div class="codrops-top">
+						<a href="{{ url_for('Main') }}">
+								<strong>Astronomical Database Visualisation</strong>
+						</a>
+						<span class="right">
+							<a href="http://www.openexoplanetcatalogue.com/">
+									Based on The Open Exoplanet Catalogue
+							</a>
+
+						</span>
+						<div class="clr"></div>
+				</div><!--/ Codrops top bar -->
+				<form action="{{ url_for('search_func') }}" method="POST">
+						<input type ="text" class="search_form" name="object_name" placeholder="Sun"  />
+						<link async href="http://fonts.googleapis.com/css?family=Antic" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
+						<input type="submit"
+						 style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+						 tabindex="-1" />
+				 </form>
+				<header>
+						<h1><span>Astronomical Database Visualisation</span></h1>
+
+		<p >
+			<a class="buttonz" href="/#followup_div">Updated</a>
+			<a class="buttonz" href="/#binnaries">Binaries</a>
+			<a class="buttonz" href="#" data-toggle="popover" data-placement="bottom" title="About me" href='#'>Contacts</a>
+			<a class="buttonz" href="#">Info</a>
+		</p>
+				</header>
+
+		</div>
+		<div id="popover_content_wrapper" style="display: none">
+			<div>	<ul><li>Developer name: <b>Yury Milto</b></li><li>Contact E-mail: <b>ymilto@gmail.com</b></li><li> Github  : <b>https://github.com/ziphead/Exoscanner</b></li></ul></div>
+		</div>
+				{% endblock menu %}
+
+			{% block content %}
+			<div class="tran_block"> Results for {{pathway}}
+					</div>
+			<div class="mclass" align="center">
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+
+				<ul>
+				{% for message in messages %}
+					<li><strong>{{message}}</strong></li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+				{% endwith %}
+							{% for entry in content %}
+							<a class="block" href = "{{url_for('viz_sys', system_id = entry.id )}}">
+							<ul>
+								<li>System name: <b>{{ entry.name }}</b></li>
+								 <li>Other names: <b>{{ entry.names }}</b></li>
+									<li> distance to system : <b> {{ entry.distance}}</b></li>
+
+													</ul>
+											</a>
+							{% endfor %}
+			{% endblock %}
+		</div>
+{% endblock body %}
+	</body>
+
+	</html>

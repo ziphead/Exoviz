@@ -1,0 +1,19 @@
+<html>
+<head>
+
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
+  </head>
+  <body>
+
+  		{% block body %}
+<div class="black">
+{% for a,b in attrs.iteritems() %}
+{% if b != None %}
+<div class="whitebox">
+<p class="pleft">{{a}} :</p> <p class = "pright"> {{b}}</p>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+	{% endblock %}
+</body>
