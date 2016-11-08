@@ -1,13 +1,18 @@
 <html>
 <head>
 	{% block head %}
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/component.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/info.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+	  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 	<title>{% block title %}{% endblock %} {{pathway}}</title>
 	{% endblock %}
 </head>
@@ -26,27 +31,107 @@
 							</a>
 
 						</span>
-						<div class="clr"></div>
-				</div><!--/ Codrops top bar -->
-				<form action="{{ url_for('search_func') }}" method="POST">
-						<input type ="text" class="search_form" name="object_name" placeholder="Sun"  />
-						<link async href="http://fonts.googleapis.com/css?family=Antic" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
-						<input type="submit"
-						 style="position: absolute; left: -9999px; width: 1px; height: 1px;"
-						 tabindex="-1" />
-				 </form>
-				<header>
-						<h1><span>Astronomical Database Visualisation</span></h1>
 
-		<p >
-			<a class="buttonz" href="/#followup_div">Updated</a>
-			<a class="buttonz" href="/#binnaries">Binaries</a>
-			<a class="buttonz" href="#" data-toggle="popover" data-placement="bottom" title="About me" href='#'>Contacts</a>
-			<a class="buttonz" href="#">Info</a>
-		</p>
-				</header>
+				</div><!--/ Codrops top bar -->
+
 
 		</div>
+		<div class="clr">
+			<form action="{{ url_for('search_func') }}" method="POST">
+					<input type ="text" class="search_form" name="object_name" placeholder="Sun"  />
+					<link async href="http://fonts.googleapis.com/css?family=Antic" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
+					<input type="submit"
+					 style="display: none;" />
+			 </form>
+			 <div class="square_menu">
+				 <div class="column">
+					 <div id="dl-menu" class="dl-menuwrapper">
+						 <button class="dl-trigger">Open Menu</button>
+						 <ul class="dl-menu">
+							 <li>
+								 <a href="#">Sort by</a>
+								 <ul class="dl-submenu">
+									 <li>
+										 <a href="#">Planets</a>
+										 <ul class="dl-submenu">
+											 <li><a href="#">Habbitable Zone</a></li>
+											 <li><a href="#">Rocky</a></li>
+											 <li><a href="#">Super &amp; Earths</a></li>
+											 <li><a href="#">Ice Giants</a></li>
+											 <li><a href="#">Gas Giants</a></li>
+										 </ul>
+									 </li>
+									 <li>
+										 <a href="#">Star Class</a>
+										 <ul class="dl-submenu">
+												 <li><a href="#">Spectral Type</a>
+													 <ul class="dl-submenu">
+													 <li><a href="#">O</a></li>
+													 <li><a href="#">B</a></li>
+													 <li><a href="#">A</a></li>
+													 <li><a href="#">F</a></li>
+													 <li><a href="#">G</a></li>
+													 <li><a href="#">K</a></li>
+													 <li><a href="#">M</a></li>
+													 </ul>
+												 </li>
+											 <li><a href="#">Mass</a>
+												 <ul class="dl-submenu">
+												 <li><a href="#">Hypergiants</a></li>
+												 <li><a href="#">Supergiants</a></li>
+												 <li><a href="#">Bright giants</a></li>
+												 <li><a href="#">Giants</a></li>
+												 <li><a href="#">Subgiants</a></li>
+												 <li><a href="#">Dwarfs</a></li>
+												 <li><a href="#">Subdwarfs</a></li>
+												 <li><a href="#">White dwarfs</a></li>
+												 </ul>
+											</li>
+											<li><a href="#">Binary system</a>
+												<ul class="dl-submenu">
+												<li><a href="#">2 stars</a></li>
+												<li><a href="#">3 stars</a></li>
+												<li><a href="#">4 stars</a></li>
+												<li><a href="#">5 stars</a></li>
+												</ul>
+										 </li>
+										 </ul>
+									 </li>
+
+								 </ul>
+							 </li>
+							 <li>
+								 <a href="#">Plots</a>
+							 </li>
+							 <li>
+								 <a href="#">About us</a>
+								</li>
+
+
+						 </ul>
+					 </div><!-- /dl-menuwrapper -->
+				 </div>
+			 </div>
+			 </div><!-- /container -->
+
+			 <!-- <script src="js/jquery.dlmenu.js"></script> -->
+			 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.dlmenu.js') }}"></script>
+			 <script>
+			 $(function() {
+				 $( '#dl-menu' ).dlmenu({
+					 animationClasses : { classin : 'dl-animate-in-5', classout : 'dl-animate-out-5' }
+				 });
+			 });
+			 </script>
+			<!-- <h1>Astronomical Database Visualisation</h1>
+
+<p >
+<a class="buttonz" href="/#followup_div">Updated</a>
+<a class="buttonz" href="/#binnaries">Binaries</a>
+<a class="buttonz" href="#" data-toggle="popover" data-placement="bottom" title="About me" href='#'>Contacts</a>
+<a class="buttonz" href="#">Info</a>
+</p> -->
+
 		<div id="popover_content_wrapper" style="display: none">
 			<div>	<ul><li>Developer name: <b>Yury Milto</b></li><li>Contact E-mail: <b>ymilto@gmail.com</b></li><li> Github  : <b>https://github.com/ziphead/Exoscanner</b></li></ul></div>
 		</div>

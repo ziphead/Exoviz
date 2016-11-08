@@ -5,3 +5,4 @@ $(document).ready(function(){
     }
   });
 });
+// function to trigger animation

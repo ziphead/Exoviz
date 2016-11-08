@@ -1,10 +1,9 @@
-<html>
-<head>
+{% extends "base.html" %}
+{% block title %}Child{% endblock %}
+{% block head %}
+    {{ super() }}
 
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/demo.css') }}">
-  </head>
-  <body>
-
+{% endblock %}
   		{% block body %}
 <div class="black">
 {% for a,b in attrs.iteritems() %}
@@ -16,4 +15,3 @@
 {% endfor %}
 </div>
 	{% endblock %}
-</body>

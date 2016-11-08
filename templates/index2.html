@@ -16,7 +16,7 @@
         <meta name="keywords" content="Exoplanets, other planet systems, binary systems, hot jupiter, superearths, second earth" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}" />
-		<script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.custom.86080.js') }}"></script>
+		<!-- <script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.custom.86080.js') }}"></script> -->
     {% endblock %}
     <body id="page">
       		{% block body %}
@@ -50,7 +50,7 @@
                     </a>
             {% endfor %}
           </div>
-          <div id ="binnaries" class="black" align = "center">
+          <div id ="binnaries" class="black">
             <div class="tran_block"> STARS IN BINARY SYSTEMS
                 </div>
                 {% for entry in binchunk %}

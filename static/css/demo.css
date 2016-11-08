@@ -7,7 +7,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 html,body {
 	margin:0;
 	padding:0;
+	background-color: black;
 }
+
 table {
 	border-collapse:collapse;
 	border-spacing:0;
@@ -53,17 +55,28 @@ body{
 .ie7 body{
 	overflow:hidden;
 }
-a{
-	color: #333;
+a {
+	color: #ccc;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #fff;
 	text-decoration: none;
 }
 
 .container2{
 	position: relative;
 	text-align: center;
+	background-color: black;
+	height: 30px;;
+
+;
+
 }
 .clr{
 	clear: both;
+
 }
 .container > header{
 	padding: 30px 30px 10px 20px;
@@ -96,7 +109,7 @@ a{
 .codrops-top{
 	font-family: Arial, sans-serif;
 	line-height: 24px;
-	font-size: 11px;
+	font-size: 12px;
 	width: 100%;
 	background: #000;
 	opacity: 0.9;
@@ -113,6 +126,7 @@ a{
 	color: #ddd;
 	display: block;
 	float: left;
+	text-decoration: none;
 }
 .codrops-top a:hover{
 	color: #fff;
@@ -163,7 +177,7 @@ a{
     color: rgba(0,0,0,1);
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
-    background: rgba(242,242,242,1);
+    background: rgba(242, 242, 242, 0.7);
     -webkit-box-shadow: none;
     box-shadow: none;
     text-shadow: 1px -2px 3px rgba(102,102,102,1) ;
@@ -182,7 +196,7 @@ a{
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  width: 300px;
+  width: 250px;
   margin: 10px;
   padding: 33px;
   border: none;
@@ -232,7 +246,7 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 300px;
+width: 250px;
 margin: 10px;
 padding: 33px;
 border: none;
@@ -279,14 +293,14 @@ transition: all 200ms cubic-bezier(0.68, -0.75, 0.265, 1.75) 10ms;
 }
   .block span.right{
   	float: left;
-    width: 300px;
+
   }
 
   .tran_block {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    padding: 25px 25px 3px;
+    padding: 25px 25px 23px;
     border: none;
     font: normal normal bold 21px/1 "Comic Sans MS", cursive, sans-serif;
     color: rgba(255,255,255,1);
@@ -294,9 +308,9 @@ transition: all 200ms cubic-bezier(0.68, -0.75, 0.265, 1.75) 10ms;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     letter-spacing: 21px;
-    background: -webkit-linear-gradient(-90deg, rgba(242,242,242,0.83) 0, rgba(242,242,242,1) 93%, rgba(242,242,242,1) 100%);
-    background: -moz-linear-gradient(180deg, rgba(242,242,242,0.83) 0, rgba(242,242,242,1) 93%, rgba(242,242,242,1) 100%);
-    background: linear-gradient(180deg, rgba(242,242,242,0.83) 0, rgba(242,242,242,1) 93%, rgba(242,242,242,1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(242,242,242,0) 20%, rgba(242,242,242,0.2) 35%, rgba(242,242,242,1) 53%, rgba(242,242,242,0.2) 70%, rgba(242,242,242,0) 90%);
+    background: -moz-linear-gradient(180deg, rgba(242,242,242,0) 20%, rgba(242,242,242,0.2) 35%, rgba(242,242,242,1) 53%, rgba(242,242,242,0.2) 70%,  rgba(242,242,242,0) 90%);
+    background: linear-gradient(180deg, rgba(242,242,242,0) 20%, rgba(242,242,242,0.2) 35%, rgba(242,242,242,1) 53%, rgba(242,242,242,0.2) 70%, rgba(242,242,242,0) 90%);
     background-position: 50% 50%;
     -webkit-background-origin: padding-box;
     background-origin: padding-box;
@@ -442,7 +456,9 @@ p.header1
  -webkit-border-radius: 0;
  border-radius: 0;
 }
+.square_menu {
 
+}
 .buttonz {
   display: inline-block;
   -webkit-box-sizing: content-box;
@@ -512,7 +528,7 @@ p.header1
   #mynetwork {
       align: center;
       width: 80%;
-      height: 400px;
+      height: 70%;
       border: 0px solid black;
       -webkit-box-shadow: 1px 2px 8px 2px rgba(0,0,0,0.4) ;
       box-shadow: 1px 2px 8px 2px rgba(0,0,0,0.4) ;
@@ -567,6 +583,9 @@ p.codrops-demos a.current-demo:hover{
 	color: #A5727D;
 	background: #6d0019;
 }
+
+/* vars and keyframes*/
+
 /* Media Queries */
 @media screen and (max-width: 767px) {
 	.container > header{
@@ -577,13 +596,17 @@ p.codrops-demos a.current-demo:hover{
 		top: auto;
 		left: auto;
 	}
+	.search_form{
+		margin-top: 0;
+	}
   .block span.right{
     float: left;
-    width: 200px;
+    width: 150px;
     opacity: 1;
   }
   #mynetwork {
     align: center;
-    width: 600px;
+    width: 400px;
+		height:600px;
   }
 }
